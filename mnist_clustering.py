@@ -16,9 +16,9 @@ x_train_scaled = scaler.fit_transform(x_train_flat)
 
 
 # Additional task: Calculate accuracy
-def calculate_accuracy(y_true, y_pred):
+def calculate_accuracy(y_true, y_pred, k):
     cluster_labels = []
-    for i in range(10):
+    for i in range(k):
         true_labels = y_true[y_pred == i]
         if len(true_labels) > 0:
             most_common_label = np.argmax(np.bincount(true_labels))
@@ -47,7 +47,7 @@ for k in k_values:
             axs[i, j].axis("off")
 
     # Calculate and print accuracy
-    accuracy = calculate_accuracy(y_train, y_pred)
+    accuracy = calculate_accuracy(y_train, y_pred, k)
     print(f"Accuracy for k={k}: {accuracy:.2%}")
 
     plt.show()
