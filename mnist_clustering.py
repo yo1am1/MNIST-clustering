@@ -15,7 +15,6 @@ scaler = StandardScaler()
 x_train_scaled = scaler.fit_transform(x_train_flat)
 
 
-# Additional task: Calculate accuracy
 def calculate_accuracy(y_true, y_pred, k):
     cluster_labels = []
     for i in range(k):
@@ -29,14 +28,12 @@ def calculate_accuracy(y_true, y_pred, k):
     return accuracy
 
 
-# Build k-means clustering model
-k_values = [10, 12, 14, 16, 18, 20]
+k_values = [4, 8, 10, 12]
 
 for k in k_values:
     kmeans = KMeans(n_clusters=k, random_state=42, n_init=20, max_iter=500)
     y_pred = kmeans.fit_predict(x_train_scaled)
 
-    # Visualize some samples from each cluster
     fig, axs = plt.subplots(k, 10, figsize=(15, 8))
     plt.suptitle(f"K-Means Clustering with k={k}")
 
@@ -46,8 +43,7 @@ for k in k_values:
             axs[i, j].imshow(cluster_samples[j], cmap="gray")
             axs[i, j].axis("off")
 
-    # Calculate and print accuracy
     accuracy = calculate_accuracy(y_train, y_pred, k)
-    print(f"Accuracy for k={k}: {accuracy:.2%}")
+    print(f"Accuracy for k={k}: {accuracy:.4%}")
 
     plt.show()
