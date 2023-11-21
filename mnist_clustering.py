@@ -4,13 +4,10 @@ from keras.datasets import mnist
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 
-# Load data
 (x_train, y_train), (_, _) = mnist.load_data()
 
-# Flatten images and normalize
 x_train_flat = x_train.reshape(x_train.shape[0], -1) / 255.0
 
-# Standardize data
 scaler = StandardScaler()
 x_train_scaled = scaler.fit_transform(x_train_flat)
 
